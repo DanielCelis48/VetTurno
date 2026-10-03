@@ -27,24 +27,19 @@ public class CitaService {
     }
 
     public CitaDTO agendarCita(CitaRequest request) {
-        // 1. Validar que la fecha sea futura
         if (request.getFechaHora() == null || request.getFechaHora().isBefore(LocalDateTime.now())) {
             throw new IllegalArgumentException("La fecha y hora de la cita debe ser en el futuro.");
         }
-
-        // 2. Buscar la mascota y el veterinario existente
         Mascota mascota = mascotaRepository.findById(request.getMascotaId())
                 .orElseThrow(() -> new RuntimeException("Mascota no encontrada con ID: " + request.getMascotaId()));
 
         Veterinario veterinario = veterinarioRepository.findById(request.getVeterinarioId())
                 .orElseThrow(() -> new RuntimeException("Veterinario no encontrado con ID: " + request.getVeterinarioId()));
 
-        // 3. Validar no cruce de horarios para el mismo veterinario
         if (citaRepository.existsByVeterinarioIdAndFechaHora(request.getVeterinarioId(), request.getFechaHora())) {
             throw new IllegalArgumentException("El veterinario ya tiene una cita agendada para la fecha y hora seleccionada.");
         }
 
-        // 4. Crear y guardar la entidad
         Cita cita = new Cita(request.getFechaHora(), request.getMotivo(), mascota, veterinario);
         Cita guardada = citaRepository.save(cita);
 
