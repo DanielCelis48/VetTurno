@@ -4,6 +4,7 @@ import VetTurnoVetTurno.dto.AuthResponse;
 import VetTurnoVetTurno.dto.LoginRequest;
 import VetTurnoVetTurno.dto.RegistroRequest;
 import VetTurnoVetTurno.service.AuthService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,12 +19,12 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<AuthResponse> registrar(@RequestBody RegistroRequest request) {
+    public ResponseEntity<AuthResponse> registrar(@Valid @RequestBody RegistroRequest request) {
         return ResponseEntity.ok(authService.registrar(request));
     }
 
     @PostMapping("/login")
-    public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest request) {
+    public ResponseEntity<AuthResponse> login(@Valid @RequestBody LoginRequest request) {
         return ResponseEntity.ok(authService.login(request));
     }
 }

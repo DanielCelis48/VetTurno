@@ -3,6 +3,7 @@ package VetTurnoVetTurno.controller;
 import VetTurnoVetTurno.dto.VeterinarioDTO;
 import VetTurnoVetTurno.dto.VeterinarioRequest;
 import VetTurnoVetTurno.service.VeterinarioService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class VeterinarioController {
     }
 
     @PostMapping
-    public ResponseEntity<VeterinarioDTO> crear(@RequestBody VeterinarioRequest request) {
+    public ResponseEntity<VeterinarioDTO> crear(@Valid @RequestBody VeterinarioRequest request) {
         return new ResponseEntity<>(veterinarioService.crear(request), HttpStatus.CREATED);
     }
 

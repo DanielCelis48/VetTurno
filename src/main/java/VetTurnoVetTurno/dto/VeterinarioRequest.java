@@ -1,7 +1,13 @@
 package VetTurnoVetTurno.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class VeterinarioRequest {
+
+    @NotBlank(message = "El nombre del veterinario es obligatorio")
     private String nombre;
+
+    @NotBlank(message = "La especialidad es obligatoria")
     private String especialidad;
 
     public VeterinarioRequest() {}

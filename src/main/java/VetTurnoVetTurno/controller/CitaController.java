@@ -3,6 +3,7 @@ package VetTurnoVetTurno.controller;
 import VetTurnoVetTurno.dto.CitaDTO;
 import VetTurnoVetTurno.dto.CitaRequest;
 import VetTurnoVetTurno.service.CitaService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class CitaController {
     }
 
     @PostMapping
-    public ResponseEntity<CitaDTO> agendar(@RequestBody CitaRequest request) {
+    public ResponseEntity<CitaDTO> agendar(@Valid @RequestBody CitaRequest request) {
         return new ResponseEntity<>(citaService.agendarCita(request), HttpStatus.CREATED);
     }
 
